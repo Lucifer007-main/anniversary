@@ -1,0 +1,592 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Bubuu 💗</title>
+
+<style>
+:root {
+  --pink: #ff77ad;
+  --deep: #e64e91;
+  --pale: #fff0f6;
+  --white: #fffafd;
+  --text: #77354f;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at 10% 10%, #fff 0 3px, transparent 4px),
+    linear-gradient(135deg, #ffe7f1, #fff5f9 50%, #ffd8e9);
+  background-size: 45px 45px, auto;
+  overflow-x: hidden;
+}
+
+button { font: inherit; cursor: pointer; }
+
+.app {
+  width: min(100%, 520px);
+  min-height: 100vh;
+  margin: auto;
+  padding: 18px 17px 26px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.brand {
+  font-size: 18px;
+  font-weight: 900;
+  color: var(--deep);
+}
+
+.music-btn, .back-btn {
+  border: 1px solid #ffc1d9;
+  background: white;
+  color: var(--deep);
+  border-radius: 30px;
+  padding: 10px 13px;
+  font-weight: bold;
+}
+
+.screen {
+  display: none;
+  animation: appear .35s ease;
+}
+
+.screen.active { display: block; }
+
+@keyframes appear {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero, .panel {
+  background: rgba(255,255,255,.88);
+  border: 2px solid white;
+  border-radius: 28px;
+  padding: 25px 19px;
+  text-align: center;
+  box-shadow: 0 10px 30px #e66b9720;
+}
+
+.bow {
+  font-size: 67px;
+  margin: 5px 0;
+  animation: bob 2s ease-in-out infinite;
+}
+
+@keyframes bob {
+  50% { transform: translateY(-7px) rotate(3deg); }
+}
+
+h1 {
+  color: var(--deep);
+  font-size: clamp(28px, 8vw, 39px);
+  line-height: 1.15;
+  margin: 9px 0;
+}
+
+h2 {
+  color: var(--deep);
+  font-size: 27px;
+  margin: 8px 0 12px;
+}
+
+p { line-height: 1.65; }
+
+.subtitle { font-size: 14px; color: #a05e7a; }
+
+.countdown {
+  margin: 18px 0;
+  background: var(--pale);
+  border-radius: 18px;
+  padding: 13px;
+  font-weight: bold;
+  color: var(--deep);
+}
+
+.primary, .menu-btn {
+  border: none;
+  border-radius: 17px;
+  padding: 14px 16px;
+  font-weight: bold;
+  transition: transform .2s, box-shadow .2s;
+}
+
+.primary {
+  color: white;
+  background: linear-gradient(135deg, #ff80b3, #e64e91);
+  box-shadow: 0 6px 15px #e64e9135;
+}
+
+.primary:hover, .menu-btn:hover { transform: translateY(-2px); }
+
+.primary:active, .menu-btn:active { transform: scale(.97); }
+
+.wide { width: 100%; margin-top: 10px; }
+
+.menu {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.menu-btn {
+  min-height: 125px;
+  background: white;
+  border: 2px solid #ffd2e3;
+  color: var(--text);
+  box-shadow: 0 5px 14px #e66b9714;
+}
+
+.menu-btn .emoji {
+  display: block;
+  font-size: 34px;
+  margin-bottom: 8px;
+}
+
+.menu-btn small {
+  display: block;
+  margin-top: 5px;
+  color: #a76a83;
+  font-weight: normal;
+}
+
+.heartline { color: var(--pink); letter-spacing: 6px; }
+
+.gallery-photo {
+  width: 100%;
+  height: 310px;
+  object-fit: cover;
+  border: 7px solid white;
+  border-radius: 20px;
+  background: #ffe1ed;
+  box-shadow: 0 6px 18px #b85d811c;
+}
+
+.photo-placeholder {
+  width: 100%;
+  height: 310px;
+  border: 3px dashed #ffb2d0;
+  border-radius: 20px;
+  background: #fff1f7;
+  display: grid;
+  place-items: center;
+  padding: 25px;
+}
+
+.photo-placeholder span { font-size: 55px; }
+
+.gallery-controls {
+  display: flex;
+  gap: 10px;
+  margin-top: 13px;
+}
+
+.gallery-controls button { flex: 1; }
+
+.dots { color: var(--deep); margin: 12px; }
+
+.letter-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+.envelope {
+  background: #fff0f6;
+  border: 2px solid #ffc3da;
+  border-radius: 17px;
+  padding: 18px 8px;
+  color: var(--deep);
+  font-weight: bold;
+}
+
+.envelope span { display: block; font-size: 35px; margin-bottom: 8px; }
+
+.letter-content {
+  margin-top: 15px;
+  padding: 18px;
+  background: #fff1f7;
+  border-radius: 18px;
+  text-align: left;
+  white-space: pre-wrap;
+  line-height: 1.8;
+}
+
+.gift {
+  font-size: 95px;
+  border: 0;
+  background: transparent;
+  animation: bob 1.7s infinite;
+}
+
+.gift:focus-visible, button:focus-visible {
+  outline: 3px solid #d73c82;
+  outline-offset: 3px;
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  margin-top: 23px;
+  color: #ad7590;
+}
+
+.heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 20;
+  animation: floatUp 1.8s ease-out forwards;
+}
+
+@keyframes floatUp {
+  from { transform: translateY(0) scale(.7); opacity: 1; }
+  to { transform: translateY(-150px) rotate(20deg) scale(1.5); opacity: 0; }
+}
+
+.confetti {
+  position: fixed;
+  z-index: 30;
+  top: -20px;
+  pointer-events: none;
+  animation: fall 3s linear forwards;
+}
+
+@keyframes fall {
+  to { transform: translateY(110vh) rotate(700deg); opacity: .2; }
+}
+
+.hidden { display: none !important; }
+
+@media (max-width: 360px) {
+  .app { padding: 12px; }
+  .hero, .panel { padding: 20px 13px; }
+  .gallery-photo, .photo-placeholder { height: 260px; }
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">🎀 For My Bubuu</div>
+    <button class="music-btn" id="musicBtn"
+      onclick="toggleMusic()">♫ Play music</button>
+  </header>
+
+  <!-- HOME -->
+  <section class="screen active" id="home">
+    <div class="hero">
+      <div class="bow">🎀</div>
+      <div class="heartline">♡ ♥ ♡</div>
+      <p class="subtitle">A little pink world made just for you</p>
+      <h1>Happy Anniversary,<br>My Bubuu! 💗</h1>
+      <p>
+        One year of us, a million little memories,
+        and so many more adventures waiting for us.
+      </p>
+      <div class="countdown" id="countdown">Counting down to our day... 💌</div>
+      <button class="primary wide" onclick="showScreen('menu')">
+        Open Our Love Story 💕
+      </button>
+    </div>
+    <div class="footer">Made with all my love, just for you ♡</div>
+  </section>
+
+  <!-- MAIN MENU -->
+  <section class="screen" id="menu">
+    <div class="panel">
+      <div class="bow" style="font-size:45px">💗</div>
+      <h2>Our Little World</h2>
+      <p>Where would you like to go, babyyy?</p>
+      <div class="menu">
+        <button class="menu-btn" onclick="openGallery()">
+          <span class="emoji">📸</span>Our Photos
+          <small>Little moments, forever</small>
+        </button>
+        <button class="menu-btn" onclick="showScreen('letters')">
+          <span class="emoji">💌</span>Secret Letters
+          <small>Open a message</small>
+        </button>
+        <button class="menu-btn" onclick="showScreen('song')">
+          <span class="emoji">🎶</span>Our Song
+          <small>A melody for us</small>
+        </button>
+        <button class="menu-btn" onclick="showScreen('surprise')">
+          <span class="emoji">🎁</span>Surprise!
+          <small>Something special</small>
+        </button>
+      </div>
+    </div>
+    <button class="back-btn wide" onclick="showScreen('home')">← Home</button>
+  </section>
+
+  <!-- PHOTOS -->
+  <section class="screen" id="gallery">
+    <div class="panel">
+      <h2>Our Memories 📸</h2>
+      <p>Every little moment with you means the world to me.</p>
+      <img id="galleryPhoto" class="gallery-photo hidden" alt="Our memory">
+      <div id="photoPlaceholder" class="photo-placeholder">
+        <div>
+          <span>💗📷</span>
+          <p>Add your photos to the <b>photos</b> folder and update the photo list in the code!</p>
+        </div>
+      </div>
+      <p id="photoCaption">Our little memories ♡</p>
+      <div class="gallery-controls">
+        <button class="back-btn" onclick="movePhoto(-1)">← Previous</button>
+        <button class="primary" onclick="movePhoto(1)">Next →</button>
+      </div>
+      <div class="dots" id="photoCounter"></div>
+    </div>
+    <button class="back-btn wide" onclick="showScreen('menu')">← Love Menu</button>
+  </section>
+
+  <!-- LETTERS -->
+  <section class="screen" id="letters">
+    <div class="panel">
+      <h2>Letters for You 💌</h2>
+      <p>Pick an envelope, my love. Each one holds a little piece of my heart.</p>
+      <div class="letter-grid">
+        <button class="envelope" onclick="openLetter(0)">
+          <span>💌</span>Open when you miss me
+        </button>
+        <button class="envelope" onclick="openLetter(1)">
+          <span>💕</span>Open when you need love
+        </button>
+        <button class="envelope" onclick="openLetter(2)">
+          <span>🌷</span>Open for a smile
+        </button>
+        <button class="envelope" onclick="openLetter(3)">
+          <span>💗</span>Our anniversary
+        </button>
+      </div>
+      <div id="letterContent" class="letter-content hidden"></div>
+      <button id="closeLetter" class="back-btn wide hidden"
+        onclick="closeLetter()">Close letter ♡</button>
+    </div>
+    <button class="back-btn wide" onclick="showScreen('menu')">← Love Menu</button>
+  </section>
+
+  <!-- MUSIC -->
+  <section class="screen" id="song">
+    <div class="panel">
+      <div class="bow">🎧</div>
+      <h2>Our Little Song</h2>
+      <p>Press play and imagine we're listening together. ♡</p>
+      <div class="countdown">♪ A melody that reminds me of you ♪</div>
+      <button class="primary wide" onclick="toggleMusic()">♫ Play / Pause</button>
+      <p class="subtitle" id="musicStatus">Your song will play here once added.</p>
+    </div>
+    <button class="back-btn wide" onclick="showScreen('menu')">← Love Menu</button>
+  </section>
+
+  <!-- SURPRISE -->
+  <section class="screen" id="surprise">
+    <div class="panel">
+      <h2>A Little Gift for You 🎀</h2>
+      <p>Something is waiting for you, babyyy...</p>
+      <button class="gift" id="giftButton" onclick="revealSurprise()"
+        aria-label="Open your anniversary gift">🎁</button>
+      <p>Tap the gift to open it! 💗</p>
+      <div id="surpriseMessage" class="letter-content hidden">
+        <h2>Happy One Year, My Love! 💕</h2>
+        <p>
+          Bubuuuuu, if I could choose all over again,
+          I would still choose you. Thank you for every laugh,
+          every conversation, every little moment, and for being
+          part of my life.
+        </p>
+        <p>
+          Even when there's distance between us, you have a special
+          place in my heart. This is only the beginning of our story.
+          Here's to more memories, more smiles, and more years together.
+        </p>
+        <p>I love you, my babyyy. Forever your shashi. 💗</p>
+        <div class="heartline">♡ ♥ ♡ ♥ ♡</div>
+      </div>
+    </div>
+    <button class="back-btn wide" onclick="showScreen('menu')">← Love Menu</button>
+  </section>
+
+  <audio id="ourSong" loop preload="metadata">
+    <source src="music/our-song.mp3" type="audio/mpeg">
+    Your browser does not support audio.
+  </audio>
+
+</div>
+
+<script>
+// CHANGE THESE PHOTOS TO MATCH YOUR OWN FILE NAMES.
+const photos = [
+  { src: "photos/photo1.jpg", caption: "One of my favourite memories 💗" },
+  { src: "photos/photo2.jpg", caption: "You make my days brighter 🌷" },
+  { src: "photos/photo3.jpg", caption: "Us, and all our little moments 🎀" },
+  { src: "photos/photo4.jpg", caption: "A memory I'll always treasure 💕" }
+];
+
+// PERSONALIZE THESE LETTERS HOWEVER YOU LIKE.
+const letters = [
+  "Babyyyy, I wish I could be beside you right now. Until then, imagine the biggest hug from me. No matter the distance, you mean so much to me. 💗",
+  "Hey, my bubuu. I hope you know that you are loved, appreciated, and special to me. You don't have to be perfect to be loved. I'm so grateful for you. 🎀",
+  "Emergency smile delivery! 🚨💗 Reminder: you're adorable, you make me happy, and somewhere out there is someone smiling because they get to call you their girl. Hehe!",
+  "HAPPY ONE YEAR, BABYYYY! 💕 Thank you for being part of this beautiful year. I can't wait to make more memories with you. This little website is just one tiny way to show you how much you mean to me. I love youuu!"
+];
+
+let photoIndex = 0;
+let currentLetter = -1;
+let surpriseOpened = false;
+
+const song = document.getElementById("ourSong");
+const musicBtn = document.getElementById("musicBtn");
+const musicStatus = document.getElementById("musicStatus");
+
+function showScreen(id) {
+  document.querySelectorAll(".screen").forEach(screen => {
+    screen.classList.remove("active");
+  });
+  document.getElementById(id).classList.add("active");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+function updateCountdown() {
+  const target = new Date("2026-10-20T00:00:00");
+  const now = new Date();
+  const diff = target.getTime() - now.getTime();
+  const el = document.getElementById("countdown");
+
+  if (diff > 0) {
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    el.textContent = `💗 ${days} days, ${hours} hours & ${minutes} minutes to our day!`;
+  } else {
+    el.textContent = "It's our special day! HAPPY ANNIVERSARY! 💗";
+  }
+}
+
+updateCountdown();
+setInterval(updateCountdown, 60000);
+
+function openGallery() {
+  photoIndex = 0;
+  renderPhoto();
+  showScreen("gallery");
+}
+
+function renderPhoto() {
+  const photo = photos[photoIndex];
+  const img = document.getElementById("galleryPhoto");
+  const placeholder = document.getElementById("photoPlaceholder");
+
+  img.onerror = () => {
+    img.classList.add("hidden");
+    placeholder.classList.remove("hidden");
+  };
+
+  img.onload = () => {
+    img.classList.remove("hidden");
+    placeholder.classList.add("hidden");
+  };
+
+  img.src = photo.src;
+  document.getElementById("photoCaption").textContent = photo.caption;
+  document.getElementById("photoCounter").textContent =
+    `${photoIndex + 1} / ${photos.length} ♡`;
+}
+
+function movePhoto(direction) {
+  photoIndex = (photoIndex + direction + photos.length) % photos.length;
+  renderPhoto();
+}
+
+function openLetter(index) {
+  currentLetter = index;
+  document.getElementById("letterContent").textContent = letters[index];
+  document.getElementById("letterContent").classList.remove("hidden");
+  document.getElementById("closeLetter").classList.remove("hidden");
+  burstHearts();
+}
+
+function closeLetter() {
+  currentLetter = -1;
+  document.getElementById("letterContent").classList.add("hidden");
+  document.getElementById("closeLetter").classList.add("hidden");
+}
+
+async function toggleMusic() {
+  try {
+    if (song.paused) {
+      await song.play();
+      musicBtn.textContent = "♫ Pause music";
+      musicStatus.textContent = "Playing our song... 💗";
+    } else {
+      song.pause();
+      musicBtn.textContent = "♫ Play music";
+      musicStatus.textContent = "Music paused. Press play when you're ready. ♡";
+    }
+  } catch (error) {
+    musicStatus.textContent =
+      "Couldn't play the song. Check that music/our-song.mp3 exists and try again.";
+  }
+}
+
+function revealSurprise() {
+  document.getElementById("surpriseMessage").classList.remove("hidden");
+  document.getElementById("giftButton").textContent = "💝";
+  if (!surpriseOpened) {
+    surpriseOpened = true;
+    confettiBurst();
+    burstHearts();
+  }
+}
+
+function burstHearts() {
+  const symbols = ["💗", "💕", "💖", "🎀", "♡"];
+  for (let i = 0; i < 12; i++) {
+    const heart = document.createElement("span");
+    heart.className = "heart";
+    heart.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    heart.style.left = Math.random() * 95 + "vw";
+    heart.style.top = (55 + Math.random() * 30) + "vh";
+    heart.style.fontSize = (18 + Math.random() * 18) + "px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 1900);
+  }
+}
+
+function confettiBurst() {
+  const symbols = ["💗", "🎀", "💕", "✨", "🌸"];
+  for (let i = 0; i < 55; i++) {
+    const piece = document.createElement("span");
+    piece.className = "confetti";
+    piece.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    piece.style.left = Math.random() * 100 + "vw";
+    piece.style.fontSize = (12 + Math.random() * 18) + "px";
+    piece.style.animationDuration = (2 + Math.random() * 2) + "s";
+    piece.style.animationDelay = Math.random() * 0.8 + "s";
+    document.body.appendChild(piece);
+    setTimeout(() => piece.remove(), 5000);
+  }
+}
+</script>
+</body>
+</html>
